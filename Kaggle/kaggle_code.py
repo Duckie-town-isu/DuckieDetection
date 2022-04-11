@@ -61,22 +61,21 @@ X_test, y_test = read_and_process_image(pic_dir[:5])
 x = np.array(X_test)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
-i=0
+i = 0
 text_labels = []
 
 image = keras.preprocessing.image.load_img(pic_loc)
-input_arr = keras.preprocessing.image.img_to_array(image)
+input_arr = keras.preprocessing.image.img_to_array(image.resize((150, 150)))
 input_arr = np.array([input_arr])  # Convert single image to a batch.
-input_arr = input_arr[:150][:150]
-predictions = model.predict(input_arr)
+predictions = model.predict(input_arr)  # ERROR GENERATED HERE
 if predictions > 0.5:
     text_labels.append('duck found!')
 else:
     text_labels.append('no duck ')
 
-plt.subplot(int(5/columns+1),columns, i+1)
-plt.title(''+text_labels[i])
-imgplot=plt.imshow(image)
+# plt.subplot(int(5/columns+1), columns, i+1)
+plt.title('' + text_labels[i])
+imgplot = plt.imshow(image)
 
 # plt.figure(figsize=(30,20))
 # for batch in test_datagen.flow(x, batch_size=1):
