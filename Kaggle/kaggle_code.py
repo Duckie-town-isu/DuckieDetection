@@ -48,47 +48,47 @@ model = keras.models.load_model('model_keras.h5')
 
 pic_dir = "/home/ranais/Ranai/Research/object-detection-ex-template/Training/frames-20220331T234620Z-001/frames"
 img_list = os.listdir(pic_dir)
-print(img_list)
 
-img = random.choice(img_list)
-pic_loc = pic_dir + "/" + img
+for i in range(10):
+    img = random.choice(img_list)
+    pic_loc = pic_dir + "/" + img
 
-pic_dir = mpimg.imread(pic_loc)
-# plt.imshow(pic_dir)
-# plt.show()
+    pic_dir = mpimg.imread(pic_loc)
+    # plt.imshow(pic_dir)
+    # plt.show()
 
-X_test, y_test = read_and_process_image(pic_dir[:5])
-x = np.array(X_test)
-test_datagen = ImageDataGenerator(rescale=1./255)
+    X_test, y_test = read_and_process_image(pic_dir[:5])
+    x = np.array(X_test)
+    test_datagen = ImageDataGenerator(rescale=1./255)
 
-i = 0
-text_labels = []
+    i = 0
+    text_labels = []
 
-image = keras.preprocessing.image.load_img(pic_loc)
-input_arr = keras.preprocessing.image.img_to_array(image.resize((150, 150)))
-input_arr = np.array([input_arr])  # Convert single image to a batch.
-predictions = model.predict(input_arr)  # ERROR GENERATED HERE
-if predictions > 0.5:
-    text_labels.append('duck found!')
-else:
-    text_labels.append('no duck ')
+    image = keras.preprocessing.image.load_img(pic_loc)
+    input_arr = keras.preprocessing.image.img_to_array(image.resize((150, 150)))
+    input_arr = np.array([input_arr])  # Convert single image to a batch.
+    predictions = model.predict(input_arr)  # ERROR GENERATED HERE
+    if predictions > 0.5:
+        text_labels.append('duck found!')
+    else:
+        text_labels.append('no duck ')
 
-# plt.subplot(int(5/columns+1), columns, i+1)
-plt.title('' + text_labels[i])
-imgplot = plt.imshow(image)
+    # plt.subplot(int(5/columns+1), columns, i+1)
+    plt.title('' + text_labels[i])
+    imgplot = plt.imshow(image)
 
-# plt.figure(figsize=(30,20))
-# for batch in test_datagen.flow(x, batch_size=1):
-#     pred = model.predict(batch)
-#     if pred>0.5:
-#         text_labels.append('duck found!')
-#     else:
-#         text_labels.append('no duck ')
-#     plt.subplot(int(5/columns+1),columns, i+1)
-#     plt.title(''+text_labels[i])
-#     imgplot=plt.imshow(batch[0])
-#     i+=1
-#     if i%10 == 0:
-#         break
-plt.show()
+    # plt.figure(figsize=(30,20))
+    # for batch in test_datagen.flow(x, batch_size=1):
+    #     pred = model.predict(batch)
+    #     if pred>0.5:
+    #         text_labels.append('duck found!')
+    #     else:
+    #         text_labels.append('no duck ')
+    #     plt.subplot(int(5/columns+1),columns, i+1)
+    #     plt.title(''+text_labels[i])
+    #     imgplot=plt.imshow(batch[0])
+    #     i+=1
+    #     if i%10 == 0:
+    #         break
+    plt.show()
 

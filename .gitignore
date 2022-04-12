@@ -4,3 +4,5 @@ venv
 .npz
 *.pt
 !Dockerfile.pt
+Training
+*.png
