@@ -34,8 +34,8 @@ for img in imgs:
 training_image_array = np.array(training_image_set)
 print(training_image_array.shape)
 training_annotn_array = np.array(training_annotn_set)
-# training_image_array = training_image_array[:, :, 1]
-training_image_array.reshape((training_image_array.shape[0], 480, 640, 1))
+training_image_array = training_image_array[:, :, :, 1]
+# training_image_array.reshape((training_image_array.shape[0], 480, 640, 1))
 print(training_image_array.shape)
 cv2.imshow("img", training_image_array[179])
 cv2.waitKey(1000)
