@@ -6,12 +6,19 @@ import numpy as np
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from keras.models import Sequential
 
+# with open(
+#         "Training/annotation-20220413T205639Z-001/annotation/final_anns.json",
+#         "r") as annotn_file:
+#     annotn = json.load(annotn_file)
+
+# root_dir = "Training/frames-20220415T203426Z-001"
+
 with open(
-        "/home/ranais/Ranai/Research/object-detection-ex-template/Training/annotation-20220413T205639Z-001/annotation/final_anns.json",
+        "Training/annotation-20220413T205639Z-001/annotation/final_anns.json",
         "r") as annotn_file:
     annotn = json.load(annotn_file)
 
-root_dir = "/home/ranais/Ranai/Research/object-detection-ex-template/Training/frames-20220412T154427Z-001/frames"
+root_dir = "Training/frames-20220415T203426Z-001/frames"
 imgs = os.listdir(root_dir)
 training_image_set = []
 training_annotn_set = []
@@ -71,7 +78,7 @@ def CNN(x_train, y_train, x_test, y_test):
     model.add(Dense(10, activation='softmax'))
 
     model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    model.fit(x_train, y_train, epochs=10, batch_size=32, verbose=0)
+    model.fit(x_train, y_train, epochs=50, batch_size=32, verbose=1)
 
     model.save_weights('CNN_Detect.h5')
     model.save('CNN_Detect.h5')
