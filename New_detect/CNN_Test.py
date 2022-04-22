@@ -3,6 +3,7 @@ import cv2
 import random
 from keras import layers
 import keras.models
+import numpy as np
 from keras import optimizers
 from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing.image import img_to_array, load_img
@@ -18,8 +19,13 @@ pic_loc = pic_dir + "/" + random.choice(img_list)
 loaded_img = cv2.imread(pic_loc)
 # height, width = loaded_img.shape[:2]
 print(loaded_img.shape)
+# loaded_array = np.array(loaded_img)
 # print(width)
-cv2.imshow("test", loaded_img)
+imS = cv2.resize(loaded_img, (960, 640)) # Resize image
+cv2.imshow("output", imS)
 cv2.waitKey(5000)
+# cv2.imshow("test", loaded_img)  # TODO Why is imshow resizing it. Resize it to 480 by 640 for the CNN. Try with PIL.
+
+
 
     # probability = model.predict(cv2) # is 4624,3468     needed 480, 640
