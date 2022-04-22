@@ -83,7 +83,6 @@ def CNN(x_train, y_train, x_test, y_test):
     model.save_weights('CNN_Detect.h5')
     model.save('CNN_Detect.h5')
 
-
 CNN(training_image_array, training_annotn_array, None, None)
 
 

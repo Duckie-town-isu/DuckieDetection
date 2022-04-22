@@ -17,14 +17,22 @@ model = keras.models.load_model('/home/ranais/Downloads/CNN_Detect_model.h5')
 pic_loc = pic_dir + "/" + random.choice(img_list)
 
 loaded_img = cv2.imread(pic_loc)
-# height, width = loaded_img.shape[:2]
 print(loaded_img.shape)
-# loaded_array = np.array(loaded_img)
-# print(width)
-imS = cv2.resize(loaded_img, (960, 640)) # Resize image
-cv2.imshow("output", imS)
-cv2.waitKey(5000)
-# cv2.imshow("test", loaded_img)  # TODO Why is imshow resizing it. Resize it to 480 by 640 for the CNN. Try with PIL.
+loaded_array = np.array(loaded_img)
+print(loaded_array.shape)
+
+opencv = cv2.resize(loaded_img, (480, 640))
+print(opencv.shape)
+opencv_array = np.array(opencv)
+print(opencv_array.shape)
+
+keras = keras.preprocessing.image.img_to_array(loaded_img.resize(480, 640)) # This line is not reszing the image into 4D space.
+print(opencv.shape)
+keras = keras[:, :, :, 1]
+
+print(model.predict(opencv_array))
+
+# # cv2.imshow("test", loaded_img)  # TODO Why is imshow resizing it. Resize it to 480 by 640 for the CNN. Try with PIL.
 
 
 
