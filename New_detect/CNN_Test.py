@@ -12,16 +12,20 @@ pic_dir = "/home/ranais/Ranai/Research/object-detection-ex-template/Training/Tes
 img_list = os.listdir(pic_dir)
 model = keras.models.load_model('/home/ranais/Downloads/CNN_Detect_model.h5')
 
-# for i in img_list:
-pic_loc = pic_dir + "/" + img_list[10]
+for i in img_list:
+    chosen_img = random.choice(img_list)
+    pic_loc = pic_dir + "/" + chosen_img
 
-loaded_img = cv2.imread(pic_loc)
+    loaded_img = cv2.imread(pic_loc)
 
-resized_img = cv2.resize(loaded_img, (640, 480))
+    resized_img = cv2.resize(loaded_img, (640, 480))
 
-img_array = np.array(resized_img)
-# img_array = img_array[:, :, 1]
-CNN_input = np.array([np.zeros((480, 640, 1))])
-CNN_input[0] = img_array[:, :, :1]
+    img_array = np.array(resized_img)
+    # img_array = img_array[:, :, 1]
+    CNN_input = np.array([np.zeros((480, 640, 1))])
+    CNN_input[0] = img_array[:, :, :1]
 
-print(model.predict(CNN_input))
+    # if model.predict(CNN_input)[0] > 0.4 and model.predict(CNN_input)[1]:
+    #     cv2.imshow(f"Duck Found in img {chosen_img}", resized_img)
+    # else:
+    #     cv2.imshow(f"No Duck Found in img {chosen_img}", resized_img)
